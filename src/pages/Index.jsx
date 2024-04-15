@@ -45,14 +45,18 @@ const Index = () => {
     <Box>
       <Box bgImage="url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1920')" bgPosition="center" bgSize="cover" h="400px">
         <Flex direction="column" alignItems="center" justify="center" h="100%" bg="rgba(0,0,0,0.5)">
-          <Heading color="white" size="3xl">Welcome to Our Store</Heading>
-          <Text color="white" mt={4} fontSize="xl">Find the latest fashion and trends</Text>
+          <Heading color="white" size="3xl">
+            Welcome to Webwork Central
+          </Heading>
+          <Text color="white" mt={4} fontSize="xl">
+            Find the latest fashion and trends
+          </Text>
         </Flex>
       </Box>
-      
+
       <Flex bg="gray.100" p={4} alignItems="center">
         <Image src="/logo.png" alt="Store Logo" w="50px" mr={4} />
-        <Heading size="xl">ACME Clothing</Heading>
+        <Heading size="xl">Webwork Central</Heading>
         <Spacer />
         <IconButton icon={<FaShoppingCart />} variant="outline" onClick={onOpen}>
           <Badge ml={1} colorScheme="red">
@@ -61,12 +65,12 @@ const Index = () => {
         </IconButton>
       </Flex>
 
-      <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(3, 1fr)", lg:"repeat(4, 1fr)"}} gap={6} p={10}>
+      <Grid templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)" }} gap={6} p={10}>
         {products.map((product) => (
           <Card key={product.id} borderRadius="lg" overflow="hidden">
             <Image src={product.image} alt={product.name} />
             <CardBody>
-              <Stack mt={6} spacing={3} align="center">  
+              <Stack mt={6} spacing={3} align="center">
                 <Heading size="md">{product.name}</Heading>
                 <Text fontWeight="bold" color="blue.600" fontSize="xl">
                   ${product.price}
@@ -87,7 +91,9 @@ const Index = () => {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader bg="blue.600" color="white">Shopping Cart</DrawerHeader>
+            <DrawerHeader bg="blue.600" color="white">
+              Shopping Cart
+            </DrawerHeader>
             <DrawerBody>
               {cart.length === 0 ? (
                 <Text>Your cart is empty</Text>
@@ -107,13 +113,11 @@ const Index = () => {
                   ))}
                   <Divider />
                   <Box p={4}>
-                    <Heading size="md">
-                      Total: ${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
-                    </Heading>
+                    <Heading size="md">Total: ${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}</Heading>
                     <Button colorScheme="green" size="lg" mt={4} w="100%">
-                    Checkout
-                  </Button>
-                </Box>
+                      Checkout
+                    </Button>
+                  </Box>
                 </>
               )}
             </DrawerBody>
