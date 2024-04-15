@@ -89,7 +89,25 @@ const Index = () => {
 
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="md">
         <DrawerOverlay>
-          <DrawerContent>
+          <DrawerContent
+            sx={{
+              transform: "perspective(1500px) rotateY(-10deg)",
+              transformOrigin: "right",
+              animation: "slide-in 0.5s forwards",
+              "@keyframes slide-in": {
+                "0%": {
+                  transform: "perspective(1500px) rotateY(-90deg)",
+                  transformOrigin: "right",
+                  opacity: 0,
+                },
+                "100%": {
+                  transform: "perspective(1500px) rotateY(-10deg)",
+                  transformOrigin: "right",
+                  opacity: 1,
+                },
+              },
+            }}
+          >
             <DrawerCloseButton />
             <DrawerHeader bg="blue.600" color="white">
               Shopping Cart
