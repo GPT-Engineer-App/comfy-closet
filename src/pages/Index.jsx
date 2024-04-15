@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, Image, Grid, Button, Flex, Spacer, IconButton, Badge, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Grid, Button, Flex, Spacer, IconButton, Badge, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Card, CardBody, CardFooter, Stack, Divider } from "@chakra-ui/react";
 import { FaShoppingCart } from "react-icons/fa";
 
 const products = [
@@ -43,8 +43,16 @@ const Index = () => {
 
   return (
     <Box>
+      <Box bgImage="url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1920')" bgPosition="center" bgSize="cover" h="400px">
+        <Flex direction="column" alignItems="center" justify="center" h="100%" bg="rgba(0,0,0,0.5)">
+          <Heading color="white" size="3xl">Welcome to Our Store</Heading>
+          <Text color="white" mt={4} fontSize="xl">Find the latest fashion and trends</Text>
+        </Flex>
+      </Box>
+      
       <Flex bg="gray.100" p={4} alignItems="center">
-        <Heading size="xl">Clothing Store</Heading>
+        <Image src="/logo.png" alt="Store Logo" w="50px" mr={4} />
+        <Heading size="xl">ACME Clothing</Heading>
         <Spacer />
         <IconButton icon={<FaShoppingCart />} variant="outline" onClick={onOpen}>
           <Badge ml={1} colorScheme="red">
@@ -53,28 +61,33 @@ const Index = () => {
         </IconButton>
       </Flex>
 
-      <Grid templateColumns="repeat(4, 1fr)" gap={6} p={10}>
+      <Grid templateColumns={{base: "repeat(1, 1fr)", md:"repeat(3, 1fr)", lg:"repeat(4, 1fr)"}} gap={6} p={10}>
         {products.map((product) => (
-          <Box key={product.id} borderWidth={1} borderRadius="lg" overflow="hidden">
+          <Card key={product.id} borderRadius="lg" overflow="hidden">
             <Image src={product.image} alt={product.name} />
-            <Box p={5}>
-              <Heading size="md">{product.name}</Heading>
-              <Text mt={2} fontSize="sm" fontWeight="500">
-                ${product.price}
-              </Text>
-              <Button mt={4} colorScheme="blue" onClick={() => addToCart(product)}>
+            <CardBody>
+              <Stack mt={6} spacing={3} align="center">  
+                <Heading size="md">{product.name}</Heading>
+                <Text fontWeight="bold" color="blue.600" fontSize="xl">
+                  ${product.price}
+                </Text>
+              </Stack>
+            </CardBody>
+            <Divider />
+            <CardFooter>
+              <Button w="100%" colorScheme="blue" onClick={() => addToCart(product)}>
                 Add to Cart
               </Button>
-            </Box>
-          </Box>
+            </CardFooter>
+          </Card>
         ))}
       </Grid>
 
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="md">
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>Shopping Cart</DrawerHeader>
+            <DrawerHeader bg="blue.600" color="white">Shopping Cart</DrawerHeader>
             <DrawerBody>
               {cart.length === 0 ? (
                 <Text>Your cart is empty</Text>
@@ -92,12 +105,15 @@ const Index = () => {
                       </Button>
                     </Flex>
                   ))}
-                  <Heading size="md" mt={8}>
-                    Total: ${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
-                  </Heading>
-                  <Button colorScheme="blue" size="lg" mt={4} width="100%">
+                  <Divider />
+                  <Box p={4}>
+                    <Heading size="md">
+                      Total: ${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
+                    </Heading>
+                    <Button colorScheme="green" size="lg" mt={4} w="100%">
                     Checkout
                   </Button>
+                </Box>
                 </>
               )}
             </DrawerBody>
